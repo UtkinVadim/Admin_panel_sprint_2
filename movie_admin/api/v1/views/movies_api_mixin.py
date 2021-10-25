@@ -24,7 +24,7 @@ class MoviesApiMixin:
             filter=Q(persons__personfilmwork__role=RoleType.writer),
             distinct=True,
         )
-        film_genres = ArrayAgg("genres__name", distinct=True)
+        genres = ArrayAgg("genres__name", distinct=True)
         return (
             self.model.objects.prefetch_related("genres", "persons")
             .values("id", "title", "description", "creation_date", "rating", "type")
@@ -32,7 +32,7 @@ class MoviesApiMixin:
                 actors=actors,
                 directors=directors,
                 writers=writers,
-                film_genres=film_genres,
+                genres=genres,
             )
             .order_by("title")
         )
