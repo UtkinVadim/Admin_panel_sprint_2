@@ -1,5 +1,6 @@
 #!/bin/sh
 
+python manage.py collectstatic --no-input
 
 echo "Waiting for postgres..."
 
@@ -9,7 +10,6 @@ done
 
 echo "PostgreSQL started"
 
-
 python manage.py migrate
-python manage.py collectstatic --no-input && sleep 1
+
 gunicorn config.asgi:application --bind 0.0.0.0:8000 -k uvicorn.workers.UvicornWorker
