@@ -4,7 +4,7 @@
 ```console
 cp .env.template .env
 ```
-Настроить переменные среды
+Настроить переменные среды в .env файле
 - SECRET_KEY
 - POSTGRES_USER
 - POSTGRES_PASSWORD
