@@ -1,0 +1,61 @@
+version: '3.9'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    container_name: movies_db
+    env_file:
+      - .env
+    volumes:
+      - db_volume:/var/lib/postgresql/data
+    expose:
+      - "5432"
+    networks:
+      - movies-network
+
+  app:
+    build:
+      context: ./movies_admin
+      dockerfile: Dockerfile
+    container_name: movies_app
+    ports:
+      - "8000:8000"
+    restart: always
+    user: "movies_user"
+    volumes:
+      - ./movies_admin:/app
+      - static_volume:/app/static
+    env_file:
+      - .env
+    environment:
+      - DB_HOST=db
+    command:
+      sh scripts/run_web.sh
+    depends_on:
+      - db
+    networks:
+      - movies-network
+
+  nginx:
+    build:
+      context: ./services/nginx
+      dockerfile: Dockerfile
+    container_name: movies_nginx
+    volumes:
+      - ./services/nginx/nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./services/nginx/configs:/etc/nginx/conf.d:ro
+      - static_volume:/app/static
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+    networks:
+      - movies-network
+
+networks:
+  movies-network:
+
+volumes:
+  db_volume:
+  static_volume:

@@ -1,4 +1,4 @@
-from api.v1.views.movies_api_mixin import MoviesApiMixin
+from movies.api.v1.views.movies_api_mixin import MoviesApiMixin
 from django.views.generic.list import BaseListView
 
 
