@@ -1,8 +1,8 @@
-version: '3.9'
+version: '3'
 
 services:
   db:
-    image: postgres
+    image: postgres:14.0-alpine
     restart: always
     container_name: movies_db
     env_file:
@@ -10,7 +10,7 @@ services:
     volumes:
       - db_volume:/var/lib/postgresql/data
     expose:
-      - "5432"
+      - 5432
     networks:
       - movies-network
 
@@ -30,8 +30,6 @@ services:
       - .env
     environment:
       - DB_HOST=db
-    command:
-      sh scripts/run_web.sh
     depends_on:
       - db
     networks:

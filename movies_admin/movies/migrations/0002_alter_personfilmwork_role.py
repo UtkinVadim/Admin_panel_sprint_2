@@ -6,13 +6,20 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('movies', '0001_initial'),
+        ("movies", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='personfilmwork',
-            name='role',
-            field=models.CharField(choices=[('actor', 'Actor'), ('director', 'Director'), ('writer', 'Writer')], max_length=255),
+            model_name="personfilmwork",
+            name="role",
+            field=models.CharField(
+                choices=[
+                    ("actor", "Actor"),
+                    ("director", "Director"),
+                    ("writer", "Writer"),
+                ],
+                max_length=255,
+            ),
         ),
     ]

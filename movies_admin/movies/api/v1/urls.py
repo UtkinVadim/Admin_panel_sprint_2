@@ -1,8 +1,8 @@
 from django.urls import path
 
-from .views import Movies, MoviesDetailApi
+from .views import MoviesDetailApi, MoviesListApi
 
 urlpatterns = [
-    path("movies/", Movies.as_view()),
+    path("movies/", MoviesListApi.as_view()),
     path("movies/<uuid:id>/", MoviesDetailApi.as_view()),
 ]

@@ -1,5 +1,5 @@
-from movies.api.v1.views.movies_api_mixin import MoviesApiMixin
 from django.views.generic.detail import BaseDetailView
+from .movies_api_mixin import MoviesApiMixin
 
 
 class MoviesDetailApi(MoviesApiMixin, BaseDetailView):

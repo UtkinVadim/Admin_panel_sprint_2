@@ -1,8 +1,9 @@
-from movies.api.v1.views.movies_api_mixin import MoviesApiMixin
 from django.views.generic.list import BaseListView
 
+from .movies_api_mixin import MoviesApiMixin
 
-class Movies(MoviesApiMixin, BaseListView):
+
+class MoviesListApi(MoviesApiMixin, BaseListView):
     paginate_by = 50
 
     def get_context_data(self, *, object_list=None, **kwargs):
