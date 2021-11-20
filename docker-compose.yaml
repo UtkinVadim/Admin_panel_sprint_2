@@ -1,4 +1,4 @@
-version: '3'
+version: '3.9'
 
 services:
   db:
@@ -53,6 +53,7 @@ services:
 
 networks:
   movies-network:
+    name: movies-network
 
 volumes:
   db_volume:
